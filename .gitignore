@@ -3,3 +3,4 @@ __pycache__/
 *.db
 out/
 .DS_Store
+data/generated/
