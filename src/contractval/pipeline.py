@@ -4,7 +4,6 @@ import hashlib
 from pathlib import Path
 
 from . import store
-from .compat import compare_contracts, has_breaking
 from .validate import validate_header, validate_row
 
 
@@ -50,6 +49,13 @@ def run_batch(file_path, contract, entity, conn):
         pk = contract.primary_key
         seen = {}  # pk -> row_number already accepted in this batch
 
+        # Optimization: load lookups once per batch instead of one SELECT per row.
+        known_customers = None
+        stored_ts = None
+        if entity == "orders":
+            known_customers = {r[0] for r in conn.execute("SELECT customer_id FROM customers")}
+            stored_ts = dict(conn.execute("SELECT order_id, event_ts FROM orders"))
+
         for i, row in enumerate(rows, start=2):  # row 1 is the header
             # malformed: wrong column count shows up as None keys/values
             if None in row or None in row.values():
@@ -73,18 +79,19 @@ def run_batch(file_path, contract, entity, conn):
                 continue
 
             if entity == "orders":
-                if not store.customer_exists(conn, row["customer_id"]):
+                if row["customer_id"] not in known_customers:
                     store.write_reject(conn, run_id, file_path, i, "invalid_reference",
                                        f"customer_id={row['customer_id']} not found", row)
                     metrics["rejected"] += 1
                     continue
-                prev_ts = store.get_order_ts(conn, key)
+                prev_ts = stored_ts.get(key)
                 if prev_ts and row["event_ts"] < prev_ts:
                     store.write_reject(conn, run_id, file_path, i, "late_arriving",
                                        f"event_ts {row['event_ts']} older than stored {prev_ts}", row)
                     metrics["rejected"] += 1
                     continue
                 store.upsert_order(conn, row, run_id, file_path)
+                stored_ts[key] = max(row["event_ts"], prev_ts or "")
             else:
                 store.upsert_customer(conn, row, run_id, file_path)
 
