@@ -1,0 +1,7 @@
+order_id,customer_id,status,amount,currency,event_ts
+o1,c1,placed,10.50,INR,2026-01-02T10:00:00Z
+o2,c2,shipped,0,USD,2026-01-02T11:00:00Z
+o3,c9,placed,5,INR,2026-01-02T12:00:00Z
+o4,c1,lost,5,INR,2026-01-02T13:00:00Z
+o5,c1,placed,-0.01,INR,2026-01-02T14:00:00Z
+o1,c1,shipped,10.50,INR,2026-01-03T10:00:00Z

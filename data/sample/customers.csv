@@ -1,0 +1,5 @@
+customer_id,email,country,created_at
+c1,a@x.com,IN,2026-01-01T00:00:00Z
+c2,b@x.com,US,2026-01-01T00:00:00Z
+c2,dup@x.com,US,2026-01-02T00:00:00Z
+c3,,IN,2026-01-01T00:00:00Z
