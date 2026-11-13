@@ -1,0 +1,7 @@
+name: customers
+version: 1
+columns:
+  - {name: customer_id, type: string, nullable: false, primary_key: true}
+  - {name: email, type: string, nullable: false}
+  - {name: country, type: string, nullable: true}
+  - {name: created_at, type: timestamp, nullable: false}

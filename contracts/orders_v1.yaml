@@ -1,0 +1,9 @@
+name: orders
+version: 1
+columns:
+  - {name: order_id, type: string, nullable: false, primary_key: true}
+  - {name: customer_id, type: string, nullable: false, references: customers.customer_id}
+  - {name: status, type: string, nullable: false, allowed_values: [placed, shipped, cancelled]}
+  - {name: amount, type: decimal, nullable: false, min: 0}
+  - {name: currency, type: string, nullable: false, allowed_values: [INR, USD, EUR]}
+  - {name: event_ts, type: timestamp, nullable: false}
