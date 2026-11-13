@@ -1,0 +1,20 @@
+{
+  "customers": {
+    "run_id": "baf085b9d76474c7",
+    "rows_in": 4,
+    "accepted": 2,
+    "rejected": 1,
+    "duplicate": 1,
+    "status": "success"
+  },
+  "orders": {
+    "run_id": "d0958f09c3278fb5",
+    "rows_in": 6,
+    "accepted": 3,
+    "rejected": 3,
+    "duplicate": 0,
+    "status": "success"
+  },
+  "seconds": 0.006,
+  "rows_per_second": 1087
+}

@@ -1,0 +1,30 @@
+{
+  "customers": {
+    "run_id": "8d2b1234b651cfd7",
+    "rows_in": 20,
+    "accepted": 20,
+    "rejected": 0,
+    "duplicate": 0,
+    "status": "success"
+  },
+  "orders": {
+    "run_id": "d2c0d67cb8c3703d",
+    "rows_in": 200,
+    "accepted": 173,
+    "rejected": 27,
+    "duplicate": 0,
+    "status": "success"
+  },
+  "seconds": 0.009,
+  "rows_per_second": 22738,
+  "reconciliation": {
+    "rows_in": 200,
+    "accepted": 173,
+    "rejected": 27,
+    "accepted_plus_rejected_equals_rows_in": true,
+    "expected_valid": 173,
+    "orders_in_target": 173,
+    "label_mismatches": 0,
+    "first_mismatches": []
+  }
+}
