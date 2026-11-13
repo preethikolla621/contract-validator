@@ -4,3 +4,4 @@ __pycache__/
 out/
 .DS_Store
 data/generated/
+data/generated_100k/
